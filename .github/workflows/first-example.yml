@@ -1,28 +1,23 @@
-name: My first workflow
+name: 'generate-artwork'
 
 on: push
 
 jobs:
-    first_job:
+    ascii_job:
         runs-on: ubuntu-latest
         steps:
         
         - name: chechout reto
           uses: actions/checkout@v4
 
-        - name: Welcome Message
-          run: | 
-            echo "Welcome to GitHub Actions"
-            ls -ltra
-            cat README.md
+        - name: Install cowsay program
+          run: sudo apt-get install cowsay
 
-        - name: Generate Artwork
+        - name: Execute cowsay
           run: cowsay -f dragon "Run for cover, I am a DRAGON....RWAWR" >> dragon.txt
         
-        # - name: list files
-        #   run: ls -ltra
-        #        cat 
+        - name: Test file
+          run: grep -i "dragon" dragon.txt
 
-        # - name: cat file
-        #   run: cat README.md
-        
+        - name: check files
+          run: ls -la
