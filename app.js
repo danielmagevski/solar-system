@@ -11,16 +11,19 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/')));
 app.use(cors())
 
-mongoose.connect(process.env.MONGO_URI, {
+const mongoUri = process.env.MONGO_URI || 'default_mongo_uri_here';
+
+mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, function(err) {
     if (err) {
-        console.log("error!! " + err)
+        console.log("error!! " + err);
     } else {
-        console.log("MongoDB Connection Successful")
+        console.log("MongoDB Connection Successful");
     }
-})
+});
+
 
 
 var Schema = mongoose.Schema;
